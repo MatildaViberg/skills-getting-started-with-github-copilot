@@ -29,6 +29,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
         activitiesList.appendChild(activityCard);
 
+        // Add participants section
+        const participantsList = details.participants.length > 0
+          ? details.participants.map(p => `<li>${p}</li>`).join('')
+          : '<li><em>No participants yet</em></li>';
+
+        const participantsSection = document.createElement("div");
+        participantsSection.className = "participants-section";
+        participantsSection.innerHTML = `
+          <p><strong>Participants:</strong></p>
+          <ul class="participants-list">
+            ${participantsList}
+          </ul>
+        `;
+        activityCard.appendChild(participantsSection);
+
         // Add option to select dropdown
         const option = document.createElement("option");
         option.value = name;
@@ -43,23 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Handle form submission
   signupForm.addEventListener("submit", async (event) => {
-              // Add participants section
-              const participantsList = details.participants.length > 0
-                ? details.participants.map(p => `<li>${p}</li>`).join('')
-                : '<li><em>No participants yet</em></li>';
-        
-              const participantsSection = document.createElement("div");
-              participantsSection.className = "participants-section";
-              participantsSection.innerHTML = `
-                <p><strong>Participants:</strong></p>
-                <ul class="participants-list">
-                  ${participantsList}
-                </ul>
-              `;
-        
-              activityCard.appendChild(participantsSection);
-
-              // Add option to select dropdown
+    event.preventDefault();
 
     const email = document.getElementById("email").value;
     const activity = document.getElementById("activity").value;
