@@ -43,7 +43,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Handle form submission
   signupForm.addEventListener("submit", async (event) => {
-    event.preventDefault();
+              // Add participants section
+              const participantsList = details.participants.length > 0
+                ? details.participants.map(p => `<li>${p}</li>`).join('')
+                : '<li><em>No participants yet</em></li>';
+        
+              const participantsSection = document.createElement("div");
+              participantsSection.className = "participants-section";
+              participantsSection.innerHTML = `
+                <p><strong>Participants:</strong></p>
+                <ul class="participants-list">
+                  ${participantsList}
+                </ul>
+              `;
+        
+              activityCard.appendChild(participantsSection);
+
+              // Add option to select dropdown
 
     const email = document.getElementById("email").value;
     const activity = document.getElementById("activity").value;
